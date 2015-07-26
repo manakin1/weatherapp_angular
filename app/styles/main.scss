@@ -1,0 +1,381 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+
+// Colors
+
+$colorText: #41637e ;
+
+// Mixins
+
+@mixin transitionAll( ) {
+    transition: all .25s ease-out;
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+}
+
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+    font-weight: bold;
+  }
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+
+}
+
+
+/* ------------ Custom styles ---------------- */
+
+html, body {
+  height: auto;
+  min-height: 100%;
+  color: white;
+}
+
+body {
+  background: url( '../images/bg.jpg' ) transparent top center no-repeat ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+input[type="text"] {
+  padding: 5px;
+  color: $colorText;
+  border: none;
+  max-width: 100%;
+
+  @media (max-width: 420px) {
+    width: 80%;
+  }
+
+  @media (min-width: 767px) {
+    min-width: 400px;
+  }
+}
+
+input[type="submit"] {
+  background: $colorText;
+  color: white;
+  padding: 4px;
+  text-transform: uppercase;
+  border: 1px solid #ccc;
+
+  @media (max-width: 420px) {
+    width: 17%;
+  }
+}
+
+.error {
+  color: red;
+  font-weight: bold ;
+  background: rgba( 255, 255, 255, .45 ) ;
+  line-height: 20px;
+  padding-left: 5px;
+  margin-top: 3px;
+}
+
+h1 {
+  @media ( max-width: 420px ) {
+    font-size: 28px;
+  }
+}
+
+h2 {
+  font-size: 26px;
+  margin-bottom: 5px;
+  @media ( max-width: 420px ) {
+    font-size: 22px;
+  }
+}
+
+h3.loader-message {
+  position: relative;
+  font-size: 20px;
+  line-height: 28px;
+  padding-left: 40px;
+  margin-bottom: 5px;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -10px;
+    width: 50px;
+    height: 50px;
+    background: url( '../images/rings.svg' ) transparent left center ;
+    background-size: 100%;
+    left: -10px;
+  }
+}
+
+#location-form {
+  height: 28px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  max-width: 100%;
+}
+
+.location-edit-switch {
+  a {
+    color: white;
+    cursor: pointer;
+    cursor: hand;
+  }
+}
+
+.background {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  opacity: .85;
+  z-index: 0;
+}
+
+.main-container {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.weather {
+  width: 100%;
+  min-height: 200px;
+  padding: 20px;
+  background: rgba( 255, 255, 255, .7 ) ;
+  color: $colorText ;
+  margin-top: 15px;
+  position: relative;
+  @include transitionAll( );
+
+  &.is-loading {
+    opacity: .75; 
+    @include transitionAll( );
+  }
+
+  h3 {
+    font-weight: bold;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .weather__unit-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    a {
+      cursor: hand;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 4px;
+      border: 1px solid transparent;
+      font-weight: bold;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      &.selected {
+        border-color: white;
+        background: rgba( 255, 255, 255, .35 ) ;
+      }
+    }
+  }
+
+  .loader {
+    background: url( '../images/rings.svg' ) transparent center center ;
+    width: 120px;
+    height: 120px;
+    display: block;
+    background-size: 100%;
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    margin-left: -60px;
+  }
+
+  .weather__degrees {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .weather__today {
+    padding-bottom: 15px;
+    border-bottom: 1px solid $colorText;
+
+    h3 {
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 25px;
+
+      @media ( max-width: 420px ) {
+        margin-top: 35px;
+      }
+    }
+
+    .weather__icon {
+      float: left;
+    }
+
+    .weather__info {
+      float: left;
+      padding-left: 30px;
+      font-size: 18px;
+
+      @media ( max-width: 420px ) {
+        padding-left: 20px;
+      }
+
+      .weather__degrees {
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+
+      .weather__description {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .weather__forecast {
+    li {
+      width: 20%;
+      display: inline-block;
+      padding: 10px;
+      vertical-align: top;
+      text-align: center;
+
+      .weather__icon {
+        margin-bottom: 10px;
+      }
+
+      h3 {
+        font-size: 16px;
+      }
+
+      @media ( max-width: 767px ) {
+        width: 50%;
+      }
+
+      @media ( max-width: 420px ) {
+        width: 100%;
+        border-bottom: 1px solid $colorText;
+        padding-bottom: 15px;
+      }
+    }
+  }
+}
+
+.weather__icon {
+  background: url( '../images/icons.png' ) ;
+  background-repeat: no-repeat ;
+  display: block;
+  width: 110px;
+  height: 105px;
+  background-position: -24px -23px ; // clear
+  margin: 0 auto;
+
+  &.icon_02d, &.icon_02n {
+    background-position: -173px -23px;  // few clouds
+  }
+ 
+  &.icon_03d, &.icon_03n {
+    background-position: -323px -23px; // scattered clouds
+  }
+
+  &.icon_04d, &.icon_04n {
+    background-position: -473px -23px;  // broken clouds
+  }
+
+  &.icon_09d, &.icon_09n {
+    background-position: -24px -188px; // shower rain
+  }
+
+  &.icon_10d, &.icon_10n {
+    background-position: -170px -185px;  // rain
+  }
+
+  &.icon_11d, &.icon_11n {
+    background-position: -470px -185px ; // thunderstorm
+  }
+
+  &.icon_13d, &.icon_13n {
+    background-position: -171px -675px ; // snow
+  }
+
+  &.icon_50d, &.icon_50n {
+    background-position: -170px -515px ; // mist
+  }
+}
+

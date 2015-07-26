@@ -1,0 +1,70 @@
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Weather Forecast</h1>
+
+    <h3 class="loader-message" ng-show="!location.address">Retrieving your location...</h3>
+    <h2 ng-show="location.address && !main.locationEditMode">{{ location.address }}</h2>
+
+    <!-- @TODO: Change this to a location picker -->
+    <form id="location-form" ng-show="main.locationEditMode" ng-submit="locationFormSubmitHandler()">
+      <input type="text" ng-model="main.customLocation" placeholder="{{location.address}}" />
+      <input type="submit" value="Go" ng-click="main.customLocationEnteredHandler(main.customLocation)" />
+    </form>
+
+    <div class="location-edit-switch" data-location-edit-switch>
+      <a ng-show="!main.locationEditMode" ng-click="main.locationEditMode = !main.locationEditMode">Change location</a>
+      <a ng-show="main.locationEditMode" ng-click="main.locationEditMode = !main.locationEditMode">Cancel</a>
+    </div>
+
+    <p class="error">{{ main.errorMessage }}</p>
+
+    <div data-ng-include data-src="'partials/weather.html'"></div>
+
+    <div class="weather" ng-class="{ 'is-loading' : forecast.loading }" ng-controller="ForecastCtrl as forecast">
+      <div class="loader" ng-show="forecast.loading"></div>
+
+      <p class="error">{{ forecast.errorMessage }}</p>
+
+      <div class="weather__today" ng-show="forecast.todayData.temp">
+        <h3>Today: {{ forecast.todayData.dt | date }}</h3>
+        <div class="weather__icon icon_{{ forecast.todayData.weather[0].icon }}"></div>
+
+        <div class="weather__info">
+          <p class="weather__degrees">{{ forecast.todayData.temp.day | number: 0 }} &deg;{{ forecast.unit }}</p>
+          <p>Min: {{ forecast.todayData.temp.min | number: 0 }} &deg;{{ forecast.unit }}</p>
+          <p>Max: {{ forecast.todayData.temp.max | number: 0 }} &deg;{{ forecast.unit }}</p>
+          <p class="weather__description">{{ forecast.todayData.weather[0].description | capitalizeFirst }}</p>
+        </div>
+        <!-- /weather__info -->
+
+        <div class="weather__unit-toggle">
+          <a ng-class="{ 'selected' : forecast.unit === 'C' }" ng-click="forecast.updateUnit('C');">&deg;C</a>
+          <a ng-class="{ 'selected' : forecast.unit === 'F' }" ng-click="forecast.updateUnit('F');">&deg;F</a>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+      <!-- /weather__today -->
+
+      <ul class="weather__forecast">
+
+        <li ng-repeat="item in forecast.forecastData" >
+          <h3>{{ item.dt | date }}</h3>
+          <div class="weather__icon icon_{{ item.weather[0].icon }}"></div>
+          <div class="weather__info">
+            <p class="weather__degrees">{{ item.temp.day | number: 0 }} &deg;{{ forecast.unit }}</p>
+            <p>{{ item.weather[0].description | capitalizeFirst }}</p>
+          </div>
+        </li>
+
+        <div class="clearfix"></div>
+      </ul>
+      <!-- /weather__forecast -->
+    </div>
+    <!-- /weather -->
+  </div>
+  <!-- /col-sm-12 -->
+
+</div>
+<!-- /row -->
