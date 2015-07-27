@@ -37,13 +37,15 @@ angular.module( 'stitchWeatherApp' )
 			  		navigator.geolocation.getCurrentPosition( function( position ) {
 				      	resolve( position ) ;
 				    }, function( ) {
-				      reject( AppConfig.errors.GEOLOCATION_FAIL ) ;
+				      //reject( AppConfig.errors.GEOLOCATION_FAIL ) ;
+              resolve( { 'latitude' : 0, 'longitude' : 0 } ) ;
 				    } ) ;
 	  			}
 
 	  			else {
 	  				// @TODO: fallback solution for browsers that don't support geolocation
-	  				reject( AppConfig.errors.GEOLOCATION_NOT_SUPPORTED ) ;
+	  				//reject( AppConfig.errors.GEOLOCATION_NOT_SUPPORTED ) ;
+            resolve( { 'latitude' : 0, 'longitude' : 0 } ) ;
 	  			}
 	  		} ) ;
   		},

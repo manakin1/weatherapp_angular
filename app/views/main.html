@@ -19,8 +19,6 @@
 
     <p class="error">{{ main.errorMessage }}</p>
 
-    <div data-ng-include data-src="'partials/weather.html'"></div>
-
     <div class="weather" ng-class="{ 'is-loading' : forecast.loading }" ng-controller="ForecastCtrl as forecast">
       <div class="loader" ng-show="forecast.loading"></div>
 
